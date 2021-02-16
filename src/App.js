@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ImageCard from './components/ImageCard';
+import SearchCard from './components/SearchCard';
 
 function App() {
   const [images, setImages] = useState([]);
@@ -15,11 +16,12 @@ function App() {
       setIsLoading(false);
     })
     .catch(err => console.log(err))
-  }, []);
+  }, [term]);
 
   return (
     <div className="container mx-auto">
-      {isLoading ? <h1 className="text-6xl text-center mx-auto mt-32">LOADIN...G</h1>
+    <SearchCard searchText={(text) => setTerm(text)}/>
+      {isLoading ? <h1 className="text-6xl text-center mx-auto mt-32">LOADING</h1>
       : <div className="grid grid-cols-3 gap-4">
         {images.map(image => (
           <ImageCard key={image.id} image={image}/>
